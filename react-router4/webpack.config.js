@@ -44,21 +44,27 @@ module.exports = {
     },
     devtool: "source-map",
     plugins: [
-      // new webpack.DefinePlugin({
-      //       'process.env':{
-      //           'NODE_ENV': JSON.stringify('production')
-      //       }
-      //   }),
-      // new webpack.optimize.UglifyJsPlugin({
-      //   sourceMap: true,
-      //   compress: {
-      //     warnings: false
-      //   }
-      // }),
-      // new webpack.LoaderOptionsPlugin({
-      //   minimize: true
-      // }),
-      new webpack.optimize.CommonsChunkPlugin(['vendor'])
+      new webpack.DefinePlugin({
+            'process.env':{
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
+      new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true,
+        compress: {
+          warnings: false
+        }
+      }),
+      new webpack.LoaderOptionsPlugin({
+        minimize: true
+      }),
+      new webpack.optimize.CommonsChunkPlugin(['vendor']),
+	    // 全局配置jquery
+	    new webpack.ProvidePlugin({
+		    $:"jquery",
+		    jQuery:"jquery",
+		    "window.jQuery":"jquery"
+	    })
     ],
    watch: true
 }
